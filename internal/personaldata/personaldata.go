@@ -1,13 +1,16 @@
+// Пакет с структурой с данными пользователя и методом, который выводит данные структуры на экран вот в определенном виде.
 package personaldata
 
 import "fmt"
 
+// Структура с данными пользователя: имя пользователя, вес пользователя, рост пользователя
 type Personal struct {
-	Name   string
-	Weight float64
-	Height float64
+	Name   string  // имя пользователя;
+	Weight float64 // вес пользователя;
+	Height float64 // рост пользователя.
 }
 
+// Метод ничего не принимает и ничего не возвращает. Он просто выводит данные структуры на экран в опред виде:
 func (p Personal) Print() {
-	fmt.Printf("Имя: %s\nВес: %.2f\nРост: %.2f", p.Name, p.Weight, p.Height)
+	fmt.Printf("Имя: %s\nВес: %.2f кг.\nРост: %.2f м.\n", p.Name, p.Weight, p.Height)
 }
