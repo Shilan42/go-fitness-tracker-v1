@@ -47,7 +47,6 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	if steps <= 0 {
 		return errors.New("error in `Parse` function: the number of steps must be greater than 0")
 	}
-	// Записываем данные о кол-ве шагов в структуру.
 	ds.Steps = steps
 
 	/* Преобразуем второй элемент слайса в time.Duration = получаем длительность прогулки из исходной строки.
