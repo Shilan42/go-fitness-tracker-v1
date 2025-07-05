@@ -33,17 +33,17 @@ func (t *Training) Parse(datastring string) (err error) {
 	// Разделяем полученную строку на слайс строк и проверяем, чтобы длина слайса была равна 3
 	parseStrings := strings.Split(datastring, ",")
 	if len(parseStrings) != 3 {
-		return errors.New("3 parameters are expected: steps, type, and duration")
+		return errors.New("error in `Parse` function: 3 parameters are expected: steps, type, and duration")
 	}
 
 	/* Преобразуем первый элемент слайса (количество шагов) в тип int = получаем кол-во шагов из исходной строки.
 	И сохраняем значение типа тренировки в соответствующем поле структуры Training - "Steps".*/
 	steps, err := strconv.Atoi(parseStrings[0])
 	if err != nil {
-		return fmt.Errorf("incorrect number of steps: %w", err)
+		return fmt.Errorf("error in `Parse` function: incorrect number of steps: %w", err)
 	}
 	if steps <= 0 {
-		return errors.New("the number of steps must be greater than 0")
+		return errors.New("error in `Parse` function: the number of steps must be greater than 0")
 	}
 	t.Steps = steps
 
@@ -54,10 +54,10 @@ func (t *Training) Parse(datastring string) (err error) {
 	И сохраняем значение типа тренировки в соответствующем поле структуры Training - "Duration".*/
 	duration, err := time.ParseDuration(parseStrings[2])
 	if err != nil {
-		return fmt.Errorf("incorrect duration: %w", err)
+		return fmt.Errorf("error in `Parse` function: incorrect duration: %w", err)
 	}
 	if duration <= 0 {
-		return errors.New("the duration of the walk must be greater than 0")
+		return errors.New("error in `Parse` function: the duration of the walk must be greater than 0")
 	}
 	t.Duration = duration
 
@@ -78,12 +78,12 @@ func (t Training) ActionInfo() (string, error) {
 	case "Бег":
 		calories, err = spentenergy.RunningSpentCalories(t.Steps, t.Personal.Weight, t.Personal.Height, t.Duration)
 		if err != nil {
-			return "", fmt.Errorf("error calculating running calories: %w", err)
+			return "", fmt.Errorf("error in `ActionInfo` function: error calculating running calories: %w", err)
 		}
 	case "Ходьба":
 		calories, err = spentenergy.WalkingSpentCalories(t.Steps, t.Personal.Weight, t.Personal.Height, t.Duration)
 		if err != nil {
-			return "", fmt.Errorf("error in calculating walking calories: %w", err)
+			return "", fmt.Errorf("error in `ActionInfo` function: error in calculating walking calories: %w", err)
 		}
 	default:
 		return "", errors.New("неизвестный тип тренировки")

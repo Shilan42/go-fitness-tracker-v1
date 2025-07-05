@@ -21,7 +21,7 @@ const (
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// Валидируем входные параметры.
 	if steps <= 0 || weight <= 0 || height <= 0 || duration <= 0 {
-		return 0, errors.New("invalid calculation parameters: all values (steps, weight, height, and duration) must be positive numbers")
+		return 0, errors.New("error in `WalkingSpentCalories` function: invalid calculation parameters: all values (steps, weight, height, and duration) must be positive numbers")
 	}
 
 	// Рассчитываем среднюю скорость с помощью MeanSpeed.
@@ -38,7 +38,7 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
 	// Валидируем входные параметры.
 	if steps <= 0 || weight <= 0 || height <= 0 || duration <= 0 {
-		return 0, errors.New("incorrect calculation parameters")
+		return 0, errors.New("error in `RunningSpentCalories` function: incorrect calculation parameters")
 	}
 
 	// Рассчитываем среднюю скорость с помощью MeanSpeed.

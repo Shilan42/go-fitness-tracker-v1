@@ -24,16 +24,17 @@ type DataParser interface {
 и выводит строку с информацией об активности с помощью метода ActionInfo().
 */
 func Info(dataset []string, dp DataParser) {
-	for _, x := range dataset {
-		err := dp.Parse(x)
+	for _, datasetParser := range dataset {
+		err := dp.Parse(datasetParser)
 		if err != nil {
 			log.Println(err)
 			continue
 		}
-		y, err := dp.ActionInfo()
+		printActivity, err := dp.ActionInfo()
 		if err != nil {
 			log.Println(err)
+			continue
 		}
-		fmt.Println(y)
+		fmt.Println(printActivity)
 	}
 }

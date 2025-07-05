@@ -29,37 +29,37 @@ type DaySteps struct {
 func (ds *DaySteps) Parse(datastring string) (err error) {
 	// Проверяем, что бы полученная строка не была пустой.
 	if datastring == "" {
-		return errors.New("the resulting string is empty")
+		return errors.New("error in `Parse` function: the resulting string is empty")
 	}
 
 	// Разделяем полученную строку на слайс строк и проверяем, чтобы длина слайса была равна 2
 	parseStrings := strings.Split(datastring, ",")
 	if len(parseStrings) != 2 {
-		return errors.New("incorrect number of values received")
+		return errors.New("error in `Parse` function: incorrect number of values received")
 	}
 
 	/* Преобразуем первый элемент слайса (количество шагов) в тип int = получаем кол-во шагов из исходной строки.
 	И сохраняем значение типа тренировки в соответствующем поле структуры DaySteps - "Steps".*/
-	Steps, err := strconv.Atoi(parseStrings[0])
+	steps, err := strconv.Atoi(parseStrings[0])
 	if err != nil {
-		return fmt.Errorf("error converting the number of steps: %w", err)
+		return fmt.Errorf("error in `Parse` function: error converting the number of steps: %w", err)
 	}
-	if Steps <= 0 {
-		return errors.New("the number of steps must be greater than 0")
+	if steps <= 0 {
+		return errors.New("error in `Parse` function: the number of steps must be greater than 0")
 	}
 	// Записываем данные о кол-ве шагов в структуру.
-	ds.Steps = Steps
+	ds.Steps = steps
 
 	/* Преобразуем второй элемент слайса в time.Duration = получаем длительность прогулки из исходной строки.
 	И сохраняем значение типа тренировки в соответствующем поле структуры DaySteps - "Duration".*/
-	Duration, err := time.ParseDuration(parseStrings[1])
+	duration, err := time.ParseDuration(parseStrings[1])
 	if err != nil {
-		return fmt.Errorf("error parsing the duration of the walk: %w", err)
+		return fmt.Errorf("error in `Parse` function: error parsing the duration of the walk: %w", err)
 	}
-	if Duration <= 0 {
-		return errors.New("the walking time must be greater than 0")
+	if duration <= 0 {
+		return errors.New("error in `Parse` function: the walking time must be greater than 0")
 	}
-	ds.Duration = Duration
+	ds.Duration = duration
 
 	// Возвращаем отсутствие ошибок, если парсинг прошел успешно.
 	return nil
@@ -69,7 +69,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 func (ds DaySteps) ActionInfo() (string, error) {
 	// Валидируем входные параметры.
 	if ds.Personal.Weight <= 0 || ds.Personal.Height <= 0 {
-		return "", errors.New("error: weight and height must be greater than 0")
+		return "", errors.New("error in `ActionInfo` function: invalid user parameters. Weight and height must be positive numbers greater than zero")
 	}
 
 	// Вычисляем дистанцию в метрах и переводим её в километры.
