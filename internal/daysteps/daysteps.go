@@ -68,9 +68,9 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 func (ds DaySteps) ActionInfo() (string, error) {
 	// Валидируем входные параметры.
 	if ds.Personal.Weight <= 0 {
-		return "", errors.New("error in `ActionInfo` function: invalid user parameters. Weight must be positive numbers greater than zero")
+		return "", errors.New("error in `ActionInfo` function: invalid user parameters. Weight must be positive number greater than zero")
 	} else if ds.Personal.Height <= 0 {
-		return "", errors.New("error in `ActionInfo` function: invalid user parameters. Height must be positive numbers greater than zero")
+		return "", errors.New("error in `ActionInfo` function: invalid user parameters. Height must be positive number greater than zero")
 	}
 
 	// Вычисляем дистанцию в метрах и переводим её в километры.
