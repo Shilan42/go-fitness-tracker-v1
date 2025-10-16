@@ -61,30 +61,6 @@ go run main.go
 * **DataParser** — интерфейс для работы с активностью
 * **Info()** — функция для обработки набора данных
 
-### Пример использования
-```go
-// Создание объекта пользователя
-user := personaldata.Personal{
-    Name: "Иван",
-    Weight: 75,
-    Height: 1.8,
-}
-
-// Работа с тренировкой
-training := trainings.Training{
-    Personal: user,
-}
-training.Parse("5000,Бег,1h30m")
-fmt.Println(training.ActionInfo())
-
-// Работа с прогулкой
-walk := daysteps.DaySteps{
-    Personal: user,
-}
-walk.Parse("1000,0h45m")
-fmt.Println(walk.ActionInfo())
-```
-
 ### Требования
 * Go версии 1.20 или выше
 * Базовые знания языка Go
